@@ -1,0 +1,25 @@
+{
+  "name": "fakeyou.js",
+  "version": "1.0.0",
+  "description": "A powerful library for interacting with the FakeYouAPI easily",
+  "main": "index.js",
+  "keywords": [
+    "fakeyou",
+    "fakeyouapi",
+    "tts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leunamcrack/fakeyou.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leunamcrack/fakeyou.js/issues"
+  },
+  "homepage": "https://github.com/leunamcrack/fakeyou.js#readme",
+  "author": "leunamcrack",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "superagent": "^8.0.0",
+    "uuid": "^8.3.2"
+  }
+}
