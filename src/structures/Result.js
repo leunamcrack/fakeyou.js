@@ -51,13 +51,13 @@ class Result {
     }
     async getAudio() {
         if(!this.audioPath) return null;
-        let audio = await Requester.__getAudio(this.client, this.audioPath);
-        return audio;
+        const buffer = await Requester.__getData(this.audioURL(), {});
+        return buffer;
     };
     async getSpectrogram() {
         if(!this.spectrogramPath) return null;
-        let spec = await Requester.__getSpec(this.client, this.spectrogramPath);
-        return spec;
+        const { mel } = await Requester.__getData(this.spectrogramURL(), {});
+        return mel;
     }
     async fetch() {
         return await this.client.results.fetch(this.token);

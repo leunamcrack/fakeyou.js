@@ -1,8 +1,7 @@
-const Constants = require("../util/Constants.js");
 const Requester = require('../util/Requester.js');
 const Util = require('../util/Util.js');
 const Badges = require("./Badges.js");
-const Model = require("./Model.js");
+const Constants = require("../util/Constants.js");
 
 class User {
     constructor(client, data) {

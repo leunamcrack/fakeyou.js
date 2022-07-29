@@ -12,21 +12,21 @@ const User = require('./structures/User');
 
 class Client {
     constructor(options) {
-        this.isReady = false;
+        this.token = null;
         this.user = null;
         this.results = new ResultManager(this);
         this.categories = new CategoryManager(this);
         this.models = new ModelManager(this);
         this.session = {};
+        this.isReady = false;
         this.__patchOptions(options);
     };
     searchModel(query) {
         if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string'));
-        const search = this.cache.filter(m => 
+        const search = this.models.cache.filter(m => 
             Util.verifyValue(m.title, query) ?? Util.verifyValue(m.name, query) ?? m.token == query
         );
-        if(!search) return null;
-        if(search.size <= 1) return search.first(); 
+        return search;
     };
 
     async start() {
@@ -48,7 +48,7 @@ class Client {
             return model.makeRequest(text);
         } else {
             if(!Util.checkType(model, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('model', 'string'));
-            const findModel = this.searchModel(model);
+            const findModel = this.searchModel(model).first();
             if(!findModel) throw new FakeYouError(this, Constants.Error.modelNotFound(model));
             return findModel.makeRequest(text);
         }
@@ -64,7 +64,7 @@ class Client {
         } else {
             if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string'));
             const { user } = await Requester.__getData(Constants.URL.profile(query), Util.__getHeaders(this));
-            return new User(this.client, user);
+            return new User(this, user);
         };
     }
     __patchOptions(options = {}) {

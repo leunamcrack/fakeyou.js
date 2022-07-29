@@ -20,9 +20,9 @@ class LeaderBoard {
     getPosition(position, isw2l) {
         if(!position) throw new FakeYouError(this, Constants.Error.optionNotFound('position'));
         if(!Util.checkType(position, 'number')) throw new FakeYouError(this, Constants.Error.invalidType('position', 'number'));
-        if(!type) type = false;
+        if(!isw2l) isw2l = false;
         if(!Util.checkType(isw2l, 'boolean')) throw new FakeYouError(this, Constants.Error.invalidType('isw2l', 'boolean'));
-        return this.group.find(i => i.position == position && isw2l ? i.type == 'w2l' : i.type == 'tts' );
+        return this.group.find(i => i.position == position && (isw2l ? i.type == 'w2l' : i.type == 'tts')) ?? null;
     };
     toArray() {
         return [

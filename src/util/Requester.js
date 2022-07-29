@@ -94,14 +94,6 @@ class Requester extends null {
             }, 1000)
         });
     };
-    static async __getAudio(url) {
-        const { body } = await request.get(url);
-        return body;
-    }
-    static async __getSpec(url) {
-        const { mel } = await this.__getData(url, {});
-        return mel;
-    }
 };
 
 module.exports = Requester;

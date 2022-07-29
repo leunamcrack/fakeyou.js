@@ -12,7 +12,7 @@ class Badges {
     };
 
     any() {
-        let array = this.group.map(c => c.slug);
+        let array = this.toArray();
         if(Array.isArray(options)) {
             return options.some(e => array.includes(e));
         } else {
@@ -21,7 +21,7 @@ class Badges {
         }
     };
     has(options) {
-        let array = this.group.map(c => c.slug);
+        let array = this.toArray();
         if(Array.isArray(options)) {
             return options.every(e => array.includes(e));
         } else {

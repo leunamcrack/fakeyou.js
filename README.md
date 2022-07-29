@@ -54,7 +54,7 @@ await fy.user.edit({
 ```js
 await fy.models.fetch('TM:7wbtjphx8h8v');
 await fy.fetchUser('acoolusername');
-let result = fy.results.get('TR:tn7gq96wg6httvnq91y4y9fka76nj');
+let result = fy.results.cache.get('TR:tn7gq96wg6httvnq91y4y9fka76nj');
 if(result) {
     await result.fetch()
 }

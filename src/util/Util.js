@@ -7,14 +7,24 @@ class Util {
         return regexp.test(query);
     }
     static verifyValue(value, data) {
-        return value.toLowerCase() == data.toLowerCase() || value.toLowerCase().includes(data.toLowerCase())
+        return value.toLowerCase() == data.toLowerCase() || value.toLowerCase().includes(data.toLowerCase());
     }
-    static checkType(value, type) {
-        return typeof value == type;
+    static checkType(value, type, opt) {
+        if(opt && typeof value == undefined) return true; 
+        return typeof value == type || value.constructor.name == type;
     };
     static isNotEmptyObj(data) {
-        if(!Boolean(data)) return false;
-        if(data.length >= 0) return false;
+        if(data == undefined) {
+            return false;
+        } else if(Array.isArray(data)) {
+            if(data.length <= 0) return false;
+            if(!data.every(i => this.isNotEmptyObj(i))) return false;
+        } else if(data.constructor == Object) {
+            if(!this.isNotEmptyObj(Object.keys(data))) return false;
+            for(const k of Object.keys(data)) {
+                if(!this.isNotEmptyObj(data[k])) return false;
+            }
+        }
         return true; 
     }
     static userPartialData(data) {

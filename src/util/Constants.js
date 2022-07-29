@@ -12,6 +12,7 @@ module.exports.URL = {
     inference: baseURL + '/tts/inference',
     job: (token) => { return `${baseURL}/tts/job/${token}` },
     model: (token) => { return `${baseURL}/tts/model/${token}`},
+    category: (token) => { return `${baseURL}/category/view/${token}` },
     assignments: (token) => { return `${baseURL}/category/assignments/tts/${token}` },
     result: (token) => { return `${baseURL}/tts/result/${token}`}, 
     profile: (user) => { return `${baseURL}/user/${user}/profile` },
@@ -45,6 +46,3 @@ module.exports.RegExp = {
     github: /^[A-Za-z0-9](?:[A-za-z0-9]|-(?=[a-z\d])){0,38}$/,
     website: /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
 };
-module.exports.Codes = {
-
-}

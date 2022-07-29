@@ -35,6 +35,12 @@ class CategoryManager {
         return newCategory;
     };
 
+    async fetch(query) {
+        if(!query) throw new FakeYouError(this, Constants.Error.optionNotFound('query'));
+        if(!Util.isToken(query, 'categoryToken')) throw new FakeYouError(this, Constants.Error.invalidToken);
+        const { category } = await Requester.__getData(Constants.URL.category(query), Util.__getHeaders(this.client));
+        return this.__add(category);
+    };
     async __fetchAll() {
         const { categories } = await Requester.__getData(Constants.URL.categories, Util.__getHeaders(this.client));
         categories.forEach(c => {

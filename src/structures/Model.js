@@ -12,7 +12,7 @@ class Model {
         this.title = data.title;
         this.name = data.maybe_suggested_unique_bot_command;
         this.description = Boolean(data.description_markdown) ? data.description_markdown : null;
-        this.categoryTokens = data.category_tokens ?? data.categories ?? null;
+        this.categoryTokens = data.category_tokens ?? data.categories.map(c => c.category_token) ?? null;
         this.category = Util.isNotEmptyObj(this.categoryTokens) ? this.client.categories.cache.filter(c => this.categoryTokens.includes(c.token)) : null;
         this.type = data.model_type ?? data.tts_model_type;
         this.userToken = data.creator_user_token;
