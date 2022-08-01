@@ -1,0 +1,16 @@
+badgeinfo
+badgename
+categoryfeatures
+categorytoken
+modelfeatures
+modeltoken
+resultoken
+usertoken
+categoryresolvable
+modelresolvable
+resultresolvable
+queueinfo
+spectrogram
+clienteditoptions
+leaderboarditem
+visibility
