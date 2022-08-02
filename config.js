@@ -91,9 +91,9 @@ module.exports = {
           { title: 'ModelResolvable', path: '/docs/main/typeof/modelresolvable.md', collapsable: false, children: [] },
           { title: 'ModelToken', path: '/docs/main/typeof/modeltoken.md', collapsable: false, children: [] },
           { title: 'QueueInfo', path: '/docs/main/typeof/queueinfo.md', collapsable: false, children: [] },
-          { title: 'ResultResolvable', path: '/docs/main/typeof/resultresolvable.md', collapsable: false, children: [] },{ title: 'LinksData', path: '/docs/main/typeof/linksdata.md', collapsable: false, children: [] },
+          { title: 'ResultResolvable', path: '/docs/main/typeof/resultresolvable.md', collapsable: false, children: [] },
           { title: 'ResultToken', path: '/docs/main/typeof/resulttoken.md', collapsable: false, children: [] },
-          { title: 'Spectrogran', path: '/docs/main/typeof/spectrogram.md', collapsable: false, children: [] },
+          { title: 'Spectrogram', path: '/docs/main/typeof/spectrogram.md', collapsable: false, children: [] },
           { title: 'UserToken', path: '/docs/main/typeof/usertoken.md', collapsable: false, children: [] },
           { title: 'Visibility', path: '/docs/main/typeof/visibility.md', collapsable: false, children: [] },
         ]
