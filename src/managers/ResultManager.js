@@ -3,7 +3,7 @@ const FakeYouError = require("../util/FakeYouError");
 const Util = require("../util/Util");
 const Constants = require("../util/Constants");
 const Requester = require("../util/Requester");
-const Result = require("../structures/Result");
+const TTSResult = require("../structures/TTSResult");
 
 class ModelManager {
     constructor(client) {
@@ -13,19 +13,19 @@ class ModelManager {
 
     resolve(query) {
         if(!query) throw new FakeYouError(this, Constants.Error.optionNotFound('query'));
-        if(query instanceof Result) {
+        if(query instanceof TTSResult) {
             return query;
         } else {
             if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string or Result'));
             return this.cache.find(m => 
-                Util.verifyValue(m.text, query) ?? m.token == query
+                Util.verifyValue(m.text, query) || m.token == query || m.audioPath == query
             )
         }
     };
     __add(data) {
         if(!data) throw new FakeYouError(this, Constants.Error.optionNotFound('data'));
         if(!Util.checkType(data, 'object')) throw new FakeYouError(this, Constants.Error.invalidType('data', 'object'));
-        const newResult = new Result(this.client, data);
+        const newResult = new TTSResult(this.client, data);
         const alreadySet = this.cache.get(newResult.token);
         if(Boolean(alreadySet) && !alreadySet.partial) {
             return alreadySet;
@@ -37,7 +37,7 @@ class ModelManager {
 
     async fetch(query) {
         if(!query) throw new FakeYouError(this, Constants.Error.optionNotFound('query'));
-        if(!Util.isToken(query, 'resultToken')) throw new FakeYouError(this, Constants.Error.invalidToken);
+        if(!Util.isToken(query, 'ttsResult')) throw new FakeYouError(this, Constants.Error.invalidToken);
         const { result } = await Requester.__getData(Constants.URL.result(query), Util.__getHeaders(this.client));   
         return this.__add(result);
     };

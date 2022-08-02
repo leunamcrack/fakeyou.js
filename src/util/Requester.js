@@ -37,7 +37,6 @@ class Requester extends null {
             const { body, headers } = await request.post(Constants.URL.login).send(options);
             if(body.success == true) {
                 client.session.auth = headers["set-cookie"][0].match(/^\w+.=([^;]+)/)[1];
-                client.session.password = null;
             }
         } catch (e) {
             if(!e.response || !e.response.body) throw new FakeYouError(this, Constants.Error.webUnavailable, true);
@@ -60,7 +59,7 @@ class Requester extends null {
     static async __editUser(client, data) {
         if(!data) throw new FakeYouError(this, Constants.Error.optionNotFound('data'));
         if(!Util.checkType(data, 'object')) throw new FakeYouError(this, Constants.Error.invalidType('data', 'object'));
-        let options = {
+        const options = {
             "cashapp_username": data.cashapp,
             "discord_username": data.discord,
             "github_username": data.github,
@@ -72,13 +71,10 @@ class Requester extends null {
             "website_url": data.website
         };
         const { success } = await this.__postData(Constants.URL.editProfile(client.user.username), options, Util.__getHeaders(client));
-        if(success) {
-            const { user }= await this.__getData(Constants.URL.profile(client.user.username), Util.__getHeaders(client));
-            return user;
-        };
+        return true;
     }
     static async __createResult(client, token) {
-        if(!Util.isToken(token, 'jobToken')) throw new FakeYouError(this, Constants.Error.invalidToken);
+        if(!Util.isToken(token, 'job')) throw new FakeYouError(this, Constants.Error.invalidToken);
         const isReady = (value) => ['complete_success', 'complete_failure', 'dead'].includes(value);
         return await new Promise((resolve, reject) => {
             let interval = setInterval(async () => {

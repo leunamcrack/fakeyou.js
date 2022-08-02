@@ -18,7 +18,7 @@ class CategoryManager {
         } else {
             if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string or Category'));
             return this.cache.find(m => 
-                Util.verifyValue(m.title, query) ?? Util.verifyValue(m.name, query) ?? m.token == query
+                Util.verifyValue(m.title, query) || Util.verifyValue(m.name, query) || m.token == query
             )
         }
     };
@@ -37,7 +37,7 @@ class CategoryManager {
 
     async fetch(query) {
         if(!query) throw new FakeYouError(this, Constants.Error.optionNotFound('query'));
-        if(!Util.isToken(query, 'categoryToken')) throw new FakeYouError(this, Constants.Error.invalidToken);
+        if(!Util.isToken(query, 'category')) throw new FakeYouError(this, Constants.Error.invalidToken);
         const { category } = await Requester.__getData(Constants.URL.category(query), Util.__getHeaders(this.client));
         return this.__add(category);
     };

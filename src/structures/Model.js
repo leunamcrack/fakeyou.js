@@ -19,43 +19,42 @@ class Model {
         this.user = Boolean(this.userToken) ? new User(this.client, Util.userPartialData(data)) : null;
         this.locale = data.ietf_language_tag ?? null;
         this.lang = data.ietf_primary_language_subtag ?? null;
-        this.createdAt = new Date(data.created_at);
-        this.updatedAt = new Date(data.updated_at);
-        this.textPipeline = data.text_pipeline_type_guess ?? null;
+        this.createdAt = Boolean(data.created_at) ? new Date(data.created_at) : null;
+        this.updatedAt = Boolean(data.updated_at) ? new Date(data.updated_at) : null;
+        this.pipeline = data.text_pipeline_type_guess ?? null;
         this.vocoder = data.maybe_default_pretrained_vocoder ?? null;
         this.algorithm = data.text_preprocessing_algorithm ?? null;
         this.setVisibility = data.creator_set_visibility ?? null;
         this.count = data.count ?? null;
-        this.featured = {
-            frontPage: Boolean(data.is_front_page_featured),
-            twitch: Boolean(data.is_twitch_featured)
+        this.features = {
+            frontPageFeatured: data.is_front_page_featured ?? null,
+            twitchFeatured: data.is_twitch_featured ?? null,
+            lockedfromUse: data.is_locked_from_use ?? null,
+            lockedfromUserModification: data.is_locked_from_user_modification ?? null
         };
-        this.locked = {
-            fromUse: data.is_locked_from_use ?? null,
-            userModification: data.is_locked_from_user_modification ?? null
-        }
     };
 
     get partial() {
         return !Boolean(this.setVisibility && (this.locale && this.lang));
     };
-    get isVisible() {
-        return this.setVisibility == "public" ? true : false;
-    };
     get createdTimestamp() {
-        return this.createdAt.getTime();
+        return Boolean(this.createdAt) ? Math.floor(this.createdAt.getTime() / 1000) : null;
     };
     get updatedTimestamp() {
-        return this.updatedAt.getTime();
+        return Boolean(this.updatedAt) ? Math.floor(this.updatedAt.getTime() / 1000) : null;
     };
 
+    isVisible() {
+        if(!Boolean(this.setVisibility)) return null;
+        return this.setVisibility == "public" ? true : false;
+    };
     modelURL() {
         return `${Constants.URL.webPage}/tts/${this.token}`;
     };
-    async makeRequest(text) {
+    async request(text) {
         if(!Util.checkType(text, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('text', 'string'));
         let alreadyResult = this.client.results.cache.find(
-            v => v.text == text && v.modelToken == this.token
+            v => v.text.toLowerCase() == text.toLowerCase() && v.modelToken == this.token
         );
         if(Boolean(alreadyResult)) return alreadyResult;
         let postData = await Requester.__postData(Constants.URL.inference, { 

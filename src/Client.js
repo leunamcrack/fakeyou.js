@@ -12,26 +12,37 @@ const User = require('./structures/User');
 
 class Client {
     constructor(options) {
-        this.token = null;
         this.user = null;
         this.results = new ResultManager(this);
         this.categories = new CategoryManager(this);
         this.models = new ModelManager(this);
-        this.session = {};
-        this.isReady = false;
+        this.usernameOrEmail = options.usernameOrEmail;
+        Object.defineProperty(this, 'session', {value:{}});
         this.__patchOptions(options);
     };
+
+    get token() {
+        return this.session.token;
+    };
+
     searchModel(query) {
+        if(!query) throw new FakeYouError(Constants.Error.optionNotFound('query'));
         if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string'));
         const search = this.models.cache.filter(m => 
-            Util.verifyValue(m.title, query) ?? Util.verifyValue(m.name, query) ?? m.token == query
+            Util.verifyValue(m.title, query) || Util.verifyValue(m.name, query)
         );
         return search;
     };
 
+    async queue() {
+        const queueData = await Requester.__getData(Constants.URL.queue, Util.__getHeaders(this));
+        let options = {
+            count: queueData.pending_job_count,
+            time: new Date(queueData.cache_time)
+        }
+        return options;
+    };
     async start() {
-        if(this.isReady) return this;
-        this.isReady = true;
         await this.models.__fetchAll();
         await this.categories.__fetchAll();
         if(this.session.usernameOrEmail && this.session.password) {
@@ -40,17 +51,18 @@ class Client {
         };
         return this;
     };
-    async makeRequest(model, text) {
+    async makeTTS(model, text) {
         if(!model) throw new FakeYouError(this, Constants.Error.optionNotFound('model'));
         if(!text) throw new FakeYouError(this, Constants.Error.optionNotFound('text'));
         if(!Util.checkType(text, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('text', 'string'));
         if(model instanceof Model) {
-            return model.makeRequest(text);
+            return model.request(text);
         } else {
             if(!Util.checkType(model, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('model', 'string'));
-            const findModel = this.searchModel(model).first();
+            let findModel = this.searchModel(model).first();
+            if(!findModel && Util.isToken(model, 'model')) findModel = this.models.cache.get(model);
             if(!findModel) throw new FakeYouError(this, Constants.Error.modelNotFound(model));
-            return findModel.makeRequest(text);
+            return findModel.request(text);
         }
     };
     async leaderboard() {
@@ -70,7 +82,7 @@ class Client {
     __patchOptions(options = {}) {
         if('token' in options) {
             if(!Util.checkType(options.token, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('token', 'string'));
-            this.token = token;
+            this.session.token = options.token ?? null;
         };
         if('usernameOrEmail' in options) {
             if(!Util.checkType(options.usernameOrEmail, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('username or email', 'string'));

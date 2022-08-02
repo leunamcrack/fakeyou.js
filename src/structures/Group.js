@@ -12,7 +12,7 @@ class Group extends Map {
             else if(count < 0) return this.last(Math.abs(count));
             else {
                 count = Math.min(this.size, count);
-                return Array.from(this.entries(), () => 
+                return Array.from({ length: count }, () => 
                     this.values().next().value
                 );
             }
@@ -83,7 +83,7 @@ class Group extends Map {
         if(arg) {
             fn.bind(arg);
         };
-        const results = new this.constructor[Symbol.species]();
+        const results = new Group();
         for (let [key, value] of this) {
             if (fn(value, key, this)) {
                 results.set(key, value);

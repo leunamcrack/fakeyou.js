@@ -1,6 +1,6 @@
 {
   "name": "fakeyou.js",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A powerful library for interacting with the FakeYouAPI easily",
   "main": "index.js",
   "keywords": [
@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/leunamcrack/fakeyou.js/issues"
   },
-  "homepage": "https://github.com/leunamcrack/fakeyou.js#readme",
+  "homepage": "https://fakeyou.js.org",
   "author": "leunamcrack",
   "license": "Apache-2.0",
   "dependencies": {

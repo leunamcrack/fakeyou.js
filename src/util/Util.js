@@ -1,18 +1,18 @@
 const Constants = require('./Constants');
 
 class Util {
-    static isToken(query, type) {
-        if(!type) type = 'userToken';
+    static isToken(query, type = 'user') {
         let regexp = Constants.RegExp[type];
         return regexp.test(query);
     }
     static verifyValue(value, data) {
+        if(!value || !data) return value == data;
         return value.toLowerCase() == data.toLowerCase() || value.toLowerCase().includes(data.toLowerCase());
     }
     static checkType(value, type, opt) {
-        if(opt && typeof value == undefined) return true; 
+        if(opt && value == undefined) return true;
         return typeof value == type || value.constructor.name == type;
-    };
+    }
     static isNotEmptyObj(data) {
         if(data == undefined) {
             return false;
@@ -47,9 +47,22 @@ class Util {
         }
         return options;
     }
+    static __isNotChanges(data, newData) {
+        const arrayOptions = [['cashapp', 'discord', 'github', 'patreon',
+        'twitter', 'twitch', 'website'], ['ttsVisibility', 'w2lVisibility']];
+        for(const key in newData) {
+            if(arrayOptions[0].includes(key)) {
+                if(data[key] !== newData[key]) return false;
+            }
+            if(arrayOptions[0].includes(key)) {
+                if(Boolean(data[key]) !== Boolean(newData[key])) return false;
+            }
+        }
+        return true;
+    }
     static __getHeaders(client) {
         let options = {};
-        if(client.token) {
+        if(client.session.token) {
             options['Authorization'] = client.token;
         }
         if(client.session.auth) {

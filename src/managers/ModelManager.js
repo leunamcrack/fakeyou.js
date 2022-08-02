@@ -18,7 +18,7 @@ class ModelManager {
         } else {
             if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string or Model'));
             return this.cache.find(m => 
-                Util.verifyValue(m.title, query) ?? Util.verifyValue(m.name, query) ?? m.token == query
+                Util.verifyValue(m.title, query) || Util.verifyValue(m.name, query) || m.token == query
             )
         }
     };
@@ -37,7 +37,7 @@ class ModelManager {
 
     async fetch(query) {
         if(!query) throw new FakeYouError(this, Constants.Error.optionNotFound('query'));
-        if(!Util.isToken(query, 'modelToken')) throw new FakeYouError(this, Constants.Error.invalidToken);
+        if(!Util.isToken(query, 'model')) throw new FakeYouError(this, Constants.Error.invalidToken);
         const { model } = await Requester.__getData(Constants.URL.model(query), Util.__getHeaders(this.client));
         const { categories } = await Requester.__getData(Constants.URL.assignments(query), Util.__getHeaders(this.client));
         const { count } = await Requester.__getData(Constants.URL.model(query)+'/count', Util.__getHeaders(this.client));

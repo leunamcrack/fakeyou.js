@@ -11,7 +11,7 @@ class Badges {
         this.__patchData(data);
     };
 
-    any() {
+    any(options) {
         let array = this.toArray();
         if(Array.isArray(options)) {
             return options.some(e => array.includes(e));
