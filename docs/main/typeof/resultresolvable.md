@@ -3,10 +3,11 @@
 
 ### Properties:
 ```js
-< A result object >
-< A result token >
-< A result text >
-< A result audio path >
+So this can be:
+> A Result object
+> A Result token
+> The audio path of a Result
+> The spectrogram path of a Result
 ```
 
 ### Type:

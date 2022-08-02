@@ -2,7 +2,7 @@
 > A badge key identifier
 
 ```js
-"early_user"              An static value
+"early_user"              An only static value
 "tts_model_uploader_1"
 ↳ tts_model_uploader_     Slug of "Uploader TTS models"
 ↳ 1                       Amount of "uploaded models" to get the badge

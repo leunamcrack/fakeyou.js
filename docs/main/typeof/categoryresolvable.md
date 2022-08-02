@@ -3,10 +3,11 @@
 
 ### Properties:
 ```js
-< A category object >
-< A category token >
-< A category title >
-< A category name >
+So this can be:
+> A Category object
+> A Category token
+> The title of a Category
+> The maybe name of a Category
 ```
 
 ### Type:

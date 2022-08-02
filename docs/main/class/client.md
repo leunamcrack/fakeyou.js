@@ -1,9 +1,8 @@
 # Client
 > The main hub to interact with FakeYouAPI
-::: warning 
+::: danger IMPORTANT 
 You need to forcely use **[start()](#start)** method to get important data from API and login if needed
 :::
-
 ### Constructor
 ```js
 new Client(options);

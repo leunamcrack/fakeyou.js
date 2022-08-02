@@ -3,10 +3,11 @@
 
 ### Properties:
 ```js
-< A model object >
-< A model token >
-< A model title >
-< A model name >
+So this can be:
+> A Model object
+> A Model token
+> The title of a Model
+> The maybe name of a Model
 ```
 
 ### Type:

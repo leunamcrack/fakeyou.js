@@ -1,10 +1,8 @@
 # ResultToken
 > A Result token is a Crockford-encoded key identifier
-
 ::: tip INFO
-For now, the only result token used is from TTS, later will be added W2L results token
+For now, the only token used is from TTS results, later will be added W2L support
 :::
-
 ### Properties
 ```js
 "TR:tn7gq96wg6httvnq91y4y9fka76nj", "TR:9wajnjhvb8vrfx84zhe711h4cjwd3", ...

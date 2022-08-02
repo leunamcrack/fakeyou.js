@@ -1,10 +1,8 @@
 # ModelFeatures
 > Info about model extra features
-
-frontPageFeatured: data.is_front_page_featured ?? null,
-            twitchFeatured: data.is_twitch_featured ?? null,
-            lockedfromUse: data.is_locked_from_use ?? null,
-            lockedfromUserModification: data.is_locked_from_user_modification ?? null
+::: warning
+A parameter can be [null](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null) if the model has not fetched
+:::
 ### Properties:
 | PARAMETER  | TYPE                                     | DESCRIPTION            | DEFAULT |
 |:----------:|:----------------------------------------:|:----------------------:|:--------:|

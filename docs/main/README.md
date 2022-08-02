@@ -1,10 +1,10 @@
 <div align="center">
-    <p><img src="https://user-images.githubusercontent.com/82254221/181195262-bd1ca7bb-9788-4155-acb5-1e5d072436f4.png" width="640"/></p>
+    <p><a href="https://npmjs.com/package/fakeyou.js"><img src="https://user-images.githubusercontent.com/82254221/181195262-bd1ca7bb-9788-4155-acb5-1e5d072436f4.png" width="640"/></a></p>
 	<p><a href="https://discord.gg/H72KFXm"><img src="https://img.shields.io/static/v1?label=DISCORD&message=FakeYou&color=7289da&style=for-the-badge" alt="Discord" /></a> <a href="https://www.npmjs.com/package/fakeyou.js"><img src="https://img.shields.io/npm/v/fakeyou.js?label=NPM&color=red&style=for-the-badge" alt="NPM" /></a> <a href="https://github.com/leunamcrack/fakeyou.js"><img src="https://img.shields.io/github/license/leunamcrack/fakeyou.js?style=for-the-badge" alt="GITHUB" /></a>
 	</p>
 </div>
 
-> **FakeYou.JS is a powerful [Node.js](https://nodejs.org) module that allows you to interact with the [FakeYouAPI](https://docs.fakeyou.com) easily.**
+> **fakeyou.js is a powerful [Node.js](https://nodejs.org) module that allows you to interact with the [FakeYouAPI](https://docs.fakeyou.com) easily.**
 
 ### Features
 * [Login or use your token](#login-or-use-your-token)
@@ -68,3 +68,9 @@ if(result) {
     await result.fetch()
 }
 ```
+
+### Useful links
++ [Documentation](https://fakeyou.js.org) ([source](https://github.com/leunamcrack/fakeyou.js/tree/docs))
++ [GitHub repository](https://github.com/leunamcrack/fakeyou.js)
++ [NPM package](https://www.npmjs.com/package/fakeyou.js)
++ [FakeYou Discord server](https://discord.gg/H72KFXm)
