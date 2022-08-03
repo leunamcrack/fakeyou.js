@@ -52,7 +52,7 @@ module.exports = {
     sidebar: {
       "/docs/": [
         {
-          title: 'GENERAL',  
+          title: 'INTRODUCTION',  
           path: "",
           collapsable: false,
           children: [
