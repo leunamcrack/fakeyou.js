@@ -24,7 +24,7 @@ class User {
         return !Boolean(this.createdAt && (this.ttsVisibility && this.w2lVisibility));
     };
     get createdTimestamp() {
-        return Boolean(this.createdAt) ? this.createdAt.getTime() : null;
+        return Boolean(this.createdAt) ? Math.floor(this.createdAt.getTime() / 1000) : null;
     };
 
     isVisible(isw2l) {

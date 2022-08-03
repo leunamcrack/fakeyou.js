@@ -9,7 +9,7 @@ class CategoryManager {
     constructor(client) {
         this.client = client;
         this.cache = new Group();
-    }
+    };
 
     resolve(query) {
         if(!query) throw new FakeYouError(this, Constants.Error.optionNotFound('query'));
@@ -17,8 +17,8 @@ class CategoryManager {
             return query;
         } else {
             if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string or Category'));
-            return this.cache.find(m => 
-                Util.verifyValue(m.title, query) || Util.verifyValue(m.name, query) || m.token == query
+            return this.cache.find(c => 
+                Util.verifyValue(c.title, query) || Util.verifyValue(c.name, query) || c.token == query
             )
         }
     };
@@ -47,7 +47,7 @@ class CategoryManager {
             return this.__add(c);
         });
         return this.cache;
-    }
+    };
 }
 
 module.exports = CategoryManager;

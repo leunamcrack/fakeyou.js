@@ -63,7 +63,7 @@ class Util {
     static __getHeaders(client) {
         let options = {};
         if(client.session.token) {
-            options['Authorization'] = client.token;
+            options['Authorization'] = client.session.token;
         }
         if(client.session.auth) {
             options['Cookie'] = `session=${client.session.auth}`;

@@ -54,7 +54,7 @@ class Model {
     async request(text) {
         if(!Util.checkType(text, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('text', 'string'));
         let alreadyResult = this.client.results.cache.find(
-            v => v.text.toLowerCase() == text.toLowerCase() && v.modelToken == this.token
+            r => r.text.toLowerCase() == text.toLowerCase() && r.modelToken == this.token
         );
         if(Boolean(alreadyResult)) return alreadyResult;
         let postData = await Requester.__postData(Constants.URL.inference, { 

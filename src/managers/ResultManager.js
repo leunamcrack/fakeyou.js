@@ -17,8 +17,8 @@ class ModelManager {
             return query;
         } else {
             if(!Util.checkType(query, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('query', 'string or Result'));
-            return this.cache.find(m => 
-                Util.verifyValue(m.text, query) || m.token == query || m.audioPath == query
+            return this.cache.find(r => 
+                Util.verifyValue(query, r.audioPath) || Util.verifyValue(query, r.spectrogramPath) || m.token == query
             )
         }
     };

@@ -55,10 +55,8 @@ class ClientUser extends User {
         if(!data) throw new FakeYouError(this, Constants.Error.optionNotFound('data'));
         if(!Util.checkType(data, 'object')) throw new FakeYouError(this, Constants.Error.invalidType('data', "object"));
         if(Util.__isNotChanges(this, data)) return this;
-        await Requester.__editUser(this.client, this.__patchUserData(data));
-        const login = await Requester.__getData(Constants.URL.session, Util.__getHeaders(this.client));
-        const { user } = await Requester.__getData(Constants.URL.profile(this.username), Util.__getHeaders(this.client));
-        this.client.user = new ClientUser(this.client, Object.assign(login.user, user));
+        const newUser = await Requester.__editUser(this.client, this, this.__patchUserData(data));
+        this.client.user = new ClientUser(this.client, newUser);
         return this.client.user;
     };
     async ttsResults() {
@@ -68,7 +66,7 @@ class ClientUser extends User {
             let result = this.client.results.__add(r);
             group.set(result.token, result);
         });
-        return Boolean(results.length) ? group : null;
+        return group;
     };
     async ttsModels() {
         const { models } = await Requester.__getData(Constants.URL.ttsModels(this.username), Util.__getHeaders(this.client));
@@ -77,7 +75,7 @@ class ClientUser extends User {
             let model = this.client.models.__add(r);
             group.set(model.token, model);
         });
-        return Boolean(models.length) ? group : null;
+        return group;
     };
     async fetch() {
         const login = await Requester.__getData(Constants.URL.session, Util.__getHeaders(this.client));

@@ -56,7 +56,7 @@ class Requester extends null {
             return Object.assign(user, info.user);
         }
     };
-    static async __editUser(client, data) {
+    static async __editUser(client, userObj, data) {
         if(!data) throw new FakeYouError(this, Constants.Error.optionNotFound('data'));
         if(!Util.checkType(data, 'object')) throw new FakeYouError(this, Constants.Error.invalidType('data', 'object'));
         const options = {
@@ -71,7 +71,11 @@ class Requester extends null {
             "website_url": data.website
         };
         const { success } = await this.__postData(Constants.URL.editProfile(client.user.username), options, Util.__getHeaders(client));
-        return true;
+        if(success) {
+            const session = await Requester.__getData(Constants.URL.session, Util.__getHeaders(client));
+            const { user } = await Requester.__getData(Constants.URL.profile(userObj.username), Util.__getHeaders(client));
+            return Object.assign(session.user, user);
+        }
     }
     static async __createResult(client, token) {
         if(!Util.isToken(token, 'job')) throw new FakeYouError(this, Constants.Error.invalidToken);

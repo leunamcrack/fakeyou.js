@@ -16,6 +16,7 @@ class Client {
         this.results = new ResultManager(this);
         this.categories = new CategoryManager(this);
         this.models = new ModelManager(this);
+        this.isReady = false;
         this.usernameOrEmail = options.usernameOrEmail;
         Object.defineProperty(this, 'session', {value:{}});
         this.__patchOptions(options);
@@ -49,21 +50,16 @@ class Client {
             const info = await Requester.__login(this);
             this.user = new ClientUser(this, info);
         };
+        this.isReady = true;
         return this;
     };
     async makeTTS(model, text) {
         if(!model) throw new FakeYouError(this, Constants.Error.optionNotFound('model'));
         if(!text) throw new FakeYouError(this, Constants.Error.optionNotFound('text'));
         if(!Util.checkType(text, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('text', 'string'));
-        if(model instanceof Model) {
-            return model.request(text);
-        } else {
-            if(!Util.checkType(model, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('model', 'string'));
-            let findModel = this.searchModel(model).first();
-            if(!findModel && Util.isToken(model, 'model')) findModel = this.models.cache.get(model);
-            if(!findModel) throw new FakeYouError(this, Constants.Error.modelNotFound(model));
-            return findModel.request(text);
-        }
+        const findModel = this.models.resolve(model);
+        if(!findModel) throw new FakeYouError(this, Constants.Error.modelNotFound(model));
+        return findModel.request(text);
     };
     async leaderboard() {
         const getData = await Requester.__getData(Constants.URL.base+'/leaderboard', Util.__getHeaders(this));
@@ -86,11 +82,11 @@ class Client {
         };
         if('usernameOrEmail' in options) {
             if(!Util.checkType(options.usernameOrEmail, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('username or email', 'string'));
-            this.session.usernameOrEmail = options.usernameOrEmail;
+            this.session.usernameOrEmail = options.usernameOrEmail?? null;
         };
         if('password' in options) {
             if(!Util.checkType(options.password, 'string')) throw new FakeYouError(this, Constants.Error.invalidType('password', 'string'));
-            this.session.password = options.password;
+            this.session.password = options.password ?? null;
         };
         return this;
     };
