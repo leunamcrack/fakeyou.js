@@ -14,13 +14,13 @@ new Client(options);
 
 ## Properties
 ### categories
-**All of categories the client is currently handling mapped by their ids**
+**All of categories the client is currently handling**
 + Type: [VoiceManager](./categorymanager.md)
 
 ---
 
 ### models
-**All of models the client is currently handling mapped by their ids**
+**All of models the client is currently handling**
 + Type: [ModelManager](./modelmanager.md)
 
 ---
@@ -32,7 +32,7 @@ new Client(options);
 ---
 
 ### results
-**All of results the client is currently handling mapped by their ids**
+**All of results the client is currently handling**
 + Type: [VoiceManager](./resultmanager.md)
 
 ---
@@ -52,7 +52,7 @@ new Client(options);
 **Fetch all data about an user**
 | PARAMETER | TYPE                                         | DESCRIPTION                 | OPTIONAL |
 |:---------:|:--------------------------------------------:|:---------------------------:|:--------:|
-| query     | [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)   | Username profile  | No       |
+| query     | [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)   | Profile username  | No       |
 + Return: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) <[User](./user.md)>
 
 ---
@@ -67,7 +67,7 @@ new Client(options);
 **Generate a TTS request**
 | PARAMETER | TYPE                                         | DESCRIPTION                 | OPTIONAL |
 |:---------:|:--------------------------------------------:|:---------------------------:|:--------:|
-| model     | [ModelResolvable](../typeof/modelresolvable.md) | Name, object or token model | No       |
+| model     | [ModelResolvable](../typeof/modelresolvable.md) | Name, object or token of model | No       |
 | text      | [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) | The text to speech | No |
 + Return: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) <[TTSResult](./ttsresult.md)>
 

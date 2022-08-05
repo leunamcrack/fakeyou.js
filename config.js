@@ -2,6 +2,12 @@ const { description } = require('../../package')
 
 module.exports = {
 
+  theme: 'succinct',
+  
+  globalUIComponents: [
+    'ThemeManager'
+  ],
+
   base: '/',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
@@ -21,7 +27,8 @@ module.exports = {
     ['link', { rel: 'shortcut icon', href: '/assets/img/logo.png'}],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['script', { src: 'https://code.iconify.design/2/2.2.1/iconify.min.js' }]
   ],
 
   /**

@@ -12,7 +12,7 @@ new ModelManager(client);
 
 ## Properties
 ### cache
-**The group of cached model items**
+**The group of cached model items mapped by their tokens**
 + Type: [Group](./group.md) <[ModelToken](../typeof/modeltoken.md), [Model](./model.md)>
 
 ---

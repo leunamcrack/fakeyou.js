@@ -12,7 +12,7 @@ new ResultManager(client);
 
 ## Properties
 ### cache
-**The group of cached model items**
+**The group of cached result items mapped by their tokens**
 + Type: [Group](./group.md) <[ResultToken](../typeof/resulttoken.md), [TTSResult](./ttsresult.md)>
 
 ---

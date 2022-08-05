@@ -4,6 +4,7 @@ heroText: null
 heroImage: ./assets/img/banner.png
 actionText: npm install fakeyou.js
 actionLink: ./#
+isCopy: true
 footer: Made by leunamcrack with 💙
 ---
 

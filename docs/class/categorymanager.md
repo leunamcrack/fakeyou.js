@@ -12,7 +12,7 @@ new CategoryManager(client);
 
 ## Properties
 ### cache
-**The group of cached category items**
+**The group of cached category items mapped by their tokens**
 + Type: [Group](./group.md) <[CategoryToken](../typeof/categorytoken.md), [Category](./category.md)>
 
 ---
@@ -35,5 +35,5 @@ new CategoryManager(client);
 **Resolves a category data to a category object**
 | PARAMETER | TYPE                                     | DESCRIPTION            | OPTIONAL |
 |:---------:|:----------------------------------------:|:----------------------:|:--------:|
-| query     | [CategoryResolvable](./typeof/categoryresolvable.md) | The title, name or token of the category | No   |
+| query     | [CategoryResolvable](./typeof/categoryresolvable.md) | The title, name or token of category | No   |
 + Return: [Category](./category.md)
