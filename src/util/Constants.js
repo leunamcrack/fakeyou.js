@@ -39,7 +39,7 @@ module.exports.RegExp = {
     user: /^(?:U:(?:[A-Z0-9]){13})$/,
     model: /^(?:TM:(?:[a-z0-9]){12})$/,
     ttsResult: /^(?:TR:(?:[a-z0-9]){29})$/,
-    job: /^(?:JTINF:(?:[a-z0-9]){26})$/,
+    job: /^(?:JT?INF[:_](?:[a-z0-9]){26,27})$/i,
     category: /^(?:CAT:(?:[a-z0-9]){11})$/,
     twitter: /(?:^[A-Za-z0-9_]{4,15})$/,
     discord: /^.{2,32}\#\d{4}$/,
